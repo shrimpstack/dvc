@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <title>DVC，更新鬧鐘</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <style>
+      body { line-height: 2; }
+      #list { line-height: 1.4; }
+    </style>
+  </head>
+  <body>
+    <audio id="se" src="./shu.mp3"></audio>
+    <button onclick="this.innerText = 'OK'">click</button><br>
+    <output id="time"></output>
+    <div id="list"></div>
+    <script>
+      let m = 0, s = 0;
+      window.addEventListener('load', () => {
+        alert('這個彈出要按確定，不然會無法正常撥放聲音');
+        setInterval(() => {
+          ms_update();
+          show_time();
+          list.innerText = new Array(20).fill(0).map((v, i) => (i*3+2).toString().padStart(2,0)+":50").join('\n');
+        }, 500);
+      });
+      function show_time() {
+        let nd = new Date();
+        let str = [
+          nd.getFullYear().toString().padStart(4,0),
+          (nd.getMonth() + 1).toString().padStart(2,0),
+          nd.getDate().toString().padStart(2,0),
+        ].join('/') + " " + [
+          nd.getHours().toString().padStart(2,0),
+          (m = nd.getMinutes()).toString().padStart(2,0),
+          (s = nd.getSeconds()).toString().padStart(2,0),
+        ].join(':');
+        time.value = str;
+      }
+      let ring = false;
+      function ms_update() {
+        if(m % 3 != 2 || s != 50) {
+          ring = false; return;
+        }
+        if(ring) return;
+        console.log(m, s);
+        se.play();
+      }
+    </script>
+  </body>
+</html>
