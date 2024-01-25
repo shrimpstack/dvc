@@ -20,7 +20,7 @@
         setInterval(() => {
           ms_update();
           show_time();
-          list.innerText = new Array(20).fill(0).map((v, i) => (i*3+2).toString().padStart(2,0)+":50").join('\n');
+          list.innerText = new Array(20).fill(0).map((v, i) => (i*3+2).toString().padStart(2,0)+":45").join('\n');
         }, 500);
       });
       function show_time() {
@@ -38,7 +38,7 @@
       }
       let ring = false;
       function ms_update() {
-        if(m % 3 != 2 || s != 50) {
+        if(m % 3 != 2 || s != 45) {
           ring = false; return;
         }
         if(ring) return;
